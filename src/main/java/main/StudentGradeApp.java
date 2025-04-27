@@ -4,10 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader; // Import FXMLLoader
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.controller.MainController; // Import the controller
 
 import java.io.IOException; // May be needed for getResource
+import java.io.InputStream;
 import java.util.Objects;   // For null checks
 
 public class StudentGradeApp extends Application {
@@ -17,24 +19,36 @@ public class StudentGradeApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Use an FXMLLoader instance to get the controller
         FXMLLoader loader = new FXMLLoader();
-        // Load the FXML resource
         loader.setLocation(Objects.requireNonNull(getClass().getResource("/view/MainView.fxml"), "Cannot find FXML file"));
         Parent root = loader.load();
 
-        // --- Get the controller instance AFTER loading ---
         controller = loader.getController();
         if (controller == null) {
             throw new IllegalStateException("Controller instance is null. Check fx:controller in FXML.");
         }
-        // --- End getting controller instance ---
 
         Scene scene = new Scene(root, 900, 700);
 
-        primaryStage.setTitle("Student Grade Analysis System");
+        // --- Set Application Icons ---
+        try {
+            InputStream iconStream256 = getClass().getResourceAsStream("/icons/icon256.png");
+            if (iconStream256 != null) {
+                primaryStage.getIcons().add(new Image(iconStream256));
+            } else {
+                System.err.println("Warning: Could not load icon256.png");
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading application icon: " + e.getMessage());
+            e.printStackTrace();
+        }
+        // --- End Icon Setting ---
+
+        primaryStage.setTitle("Student Grade Analyzer");
         primaryStage.setScene(scene);
-        primaryStage.setOnCloseRequest(event -> System.out.println("Window close request received.")); // Optional debug log
+        primaryStage.setOnCloseRequest(event -> {
+            System.out.println("Window close request received.");
+        });
         primaryStage.show();
     }
 
