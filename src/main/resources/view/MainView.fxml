@@ -191,11 +191,22 @@
                         </Button>
                         <Button fx:id="removeStudentButton" mnemonicParsing="false"
                                 onAction="#handleRemoveStudentAction" prefWidth="140.0"
-                                style="-fx-background-color: #C71E22; -fx-padding: 5 5; -fx-background-radius: 5 15 5 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.0, 3.0, 3.0);"
+                                style="-fx-background-color: #e55535; -fx-padding: 5 5; -fx-background-radius: 5 15 5 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.0, 3.0, 3.0);"
                                 text="Remove Selected" textFill="WHITE">
                             <font>
                                 <Font size="16.0"/>
                             </font>
+                        </Button>
+                        <Button fx:id="removeAllStudentsButton" mnemonicParsing="false"
+                                onAction="#handleRemoveAllStudentsAction" prefWidth="140.0"
+                                style="-fx-background-color: #C71E22; -fx-padding: 5 5; -fx-background-radius: 5 15 5 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.0, 3.0, 3.0);"
+                                text="Remove All" textFill="WHITE">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0"/> <!-- Optional: Adjust spacing -->
+                            </HBox.margin>
                         </Button>
 
                         <Button fx:id="statisticsButton" mnemonicParsing="false" onAction="#handleStatisticsAction"

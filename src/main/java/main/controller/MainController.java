@@ -77,6 +77,8 @@ public class MainController implements Initializable {
     @FXML
     private Button removeStudentButton;
     @FXML
+    private Button removeAllStudentsButton;
+    @FXML
     private Button statisticsButton;
     @FXML
     private Button distributionButton;
@@ -273,6 +275,29 @@ public class MainController implements Initializable {
         } else {
             showAlert("Selection Error", "Please select a student from the table to remove.");
         }
+    }
+
+    @FXML
+    private void handleRemoveAllStudentsAction(ActionEvent event) {
+        if (students.isEmpty()) {
+            showAlert("Information", "There are no students to remove.");
+            return;
+        }
+
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Removal");
+        confirmation.setHeaderText("Remove ALL Students?");
+        confirmation.setContentText("Are you sure you want to permanently remove all student records?\nThis action cannot be undone.");
+        confirmation.initOwner(tableView.getScene().getWindow()); // Important for modality
+        confirmation.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO); // Explicitly set buttons
+
+        confirmation.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                students.clear(); // Clear the underlying ObservableList
+                showAlert("Success", "All student records have been removed.");
+                // Data will be saved as empty on exit, or call saveData() if needed immediately
+            }
+        });
     }
 
     @FXML
