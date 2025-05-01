@@ -204,6 +204,10 @@ public class MainController implements Initializable {
             showAlert("Error", "Please select a sorting algorithm and criteria.");
             return;
         }
+        if (students.isEmpty()) {
+            showAlert("Information", "There are no students to sort.");
+            return;
+        }
         List<Student> studentList = new ArrayList<>(students);
         Collections.shuffle(studentList); // Shuffle for performance testing and avoid StackOverflow
         long startTime = System.nanoTime();
